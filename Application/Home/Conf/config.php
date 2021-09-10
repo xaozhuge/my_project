@@ -1,4 +1,4 @@
 <?php
 return array(
-	'LOAD_EXT_CONFIG' => 'db',
+	'LOAD_EXT_CONFIG' => 'sensitive,db',
 );

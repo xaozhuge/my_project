@@ -20,3 +20,7 @@ function p($data){
     echo PHP_EOL;
     die;
 }
+
+function checkIsSet($info, $key){
+    return isset($info[$key]) ? $info[$key] : '';
+}
