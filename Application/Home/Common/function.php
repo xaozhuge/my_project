@@ -24,3 +24,7 @@ function p($data){
 function checkIsSet($info, $key){
     return isset($info[$key]) ? $info[$key] : '';
 }
+
+function dv($value,$toValue=''){
+    return empty($value) ? $toValue : $value;
+}
