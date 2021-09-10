@@ -10,6 +10,22 @@ class RemindDateModel extends BModel {
 	protected $trueTableName    =   'remind_date';
 
 	/**
+	 * [formatRemindContent 格式化提醒内容]
+	 * @author zzz
+	 * @DateTime 2021-09-11T01:06:43+0800
+	 */
+	public function formatRemindContent($remind_info){
+		$content = $remind_info['solar_monthday']. ' / '. $remind_info['lunar_monthday']. "<br>";
+		if(empty($remind_info['event'])) return '';
+		foreach ($remind_info['event'] as $k=>$v) {
+			$content.= ($k+1). '.'. $v. "<br>";
+		}
+		$content .= "<br>";
+		$content .= "<br>";
+		return $content;
+	}
+
+	/**
 	 * [getRemindByDate 根据日期查找提醒]
 	 * @author zzz
 	 * @DateTime 2021-09-11T00:40:52+0800
@@ -22,7 +38,8 @@ class RemindDateModel extends BModel {
 			->inSolarDate([$solar_monthday, $common_day])
 			->_orComplex(['lunar_date', 'solar_date'])
 			->getField('event', true);
-		return $event;
+		$data = compact('solar_monthday', 'lunar_monthday', 'event');
+		return $data;
 	}
 
 }
