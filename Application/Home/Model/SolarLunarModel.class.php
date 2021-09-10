@@ -298,4 +298,15 @@ class SolarLunarModel{
         $lunar_info = $this->getLunarByDiffDay($solar_year, $diff_day);
         return $lunar_info;
     }
+
+    /**
+     * [getLunarMonthDay 获取农历月日]
+     * @author zzz
+     * @DateTime 2021-09-11T00:35:56+0800
+     */
+    public function getLunarMonthDay($solar_date){
+        $lunar_info = $this->convertSolarToLunar($solar_date);
+        $lunar_monthday = $lunar_info['lunar_month']. $lunar_info['lunar_day'];
+        return $lunar_monthday;
+    }
 }

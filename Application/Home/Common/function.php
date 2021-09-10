@@ -28,3 +28,12 @@ function checkIsSet($info, $key){
 function dv($value,$toValue=''){
     return empty($value) ? $toValue : $value;
 }
+
+/**
+ * [pp print para 打印参数]
+ * @author zzz
+ * @DateTime 2019-03-27T10:33:15+0800
+ */
+function pp(){
+    print_r(func_get_args());die;
+}
