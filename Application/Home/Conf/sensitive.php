@@ -1,6 +1,6 @@
 <?php
 
-$var_info = file_get_contents('.sensitive_var');
+$var_info = file_get_contents(PROJECT_PATH.'/.sensitive_var');
 $var_list = explode(PHP_EOL, $var_info);
 foreach ($var_list as $v) {
     $temp     = explode('=', $v);
