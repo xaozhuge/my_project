@@ -29,7 +29,7 @@ class EmailModel extends BModel{
      */
     public function sendEmail($toemail, $title, $content){
         //邮件内容
-        $mailcontent = "<h1>". $content. "</h1>";
+        $mailcontent = "<p>". $content. "</p>";
         //邮件格式（HTML/TXT）,TXT为文本邮件
         $mailtype    = "HTML";
         //这里面的一个true是表示使用身份验证,否则不使用身份验证.

@@ -6,8 +6,8 @@ namespace Home\Controller;
 class TestController extends Controller {
 
 	public function test(){
-		$start_date = '2021-09-10';
-		$end_date   = $this->getModel('Date')->getNumDaysAfter(30);
+		$start_date = date('Y-m-d');
+		$end_date   = $this->getModel('Date')->getNumDaysAfter(7);
 		$range_date = $this->getModel('Date')->getDateRange($start_date, $end_date);
 		$content    = '';
 		foreach ($range_date as $v) {
