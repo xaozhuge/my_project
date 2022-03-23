@@ -7,6 +7,20 @@ use Think\Model;
 class BModel extends Model{
 
     /**
+     * [__construct ]
+     * name 数据表名
+     * connection 数据库配置
+     * @author zzz
+     * @DateTime 2022-03-23T12:59:03+0800
+     */
+    public function __construct($name = '', $tablePrefix = '', $connection = ''){
+        if(strpos($name,'.') != false){
+            list($connection, $name) = explode('.', $name);  
+        }
+        parent::__construct($name, $tablePrefix, $connection);
+    }
+
+    /**
      * 获取model对象
      */
     public function getModel($modelName){
