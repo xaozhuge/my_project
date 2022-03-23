@@ -21,6 +21,17 @@ class BModel extends Model{
     }
 
     /**
+     * [_initialize 解析数据库配置]
+     * @author zzz
+     * @DateTime 2022-03-23T20:17:46+0800
+     */
+    public function _initialize(){
+        if(strpos($this->trueTableName, '.') != false){
+            list($this->connection, $this->trueTableName) = explode('.', $this->trueTableName);
+        }
+    }
+
+    /**
      * 获取model对象
      */
     public function getModel($modelName){
