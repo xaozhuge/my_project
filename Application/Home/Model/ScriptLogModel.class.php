@@ -19,7 +19,9 @@ class ScriptLogModel extends BModel{
      * @DateTime 2022-03-24T16:21:26+0800
      */
     public function getPosition($code){
-        return $this->byCode($code)->getField('position');
+        $position = $this->byCode($code)->getField('position');
+        $position = dv($position, 0);
+        return $position;
     }
 
     /**
