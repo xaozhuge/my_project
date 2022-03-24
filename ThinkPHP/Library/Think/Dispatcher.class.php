@@ -265,6 +265,7 @@ class Dispatcher
         // 获取控制器和操作名
         define('CONTROLLER_NAME', defined('BIND_CONTROLLER') ? BIND_CONTROLLER : self::getController($varController, $urlCase));
         define('ACTION_NAME', defined('BIND_ACTION') ? BIND_ACTION : self::getAction($varAction, $urlCase));
+        define('INTERFACE_NAME', strtolower(CONTROLLER_NAME. $depr. ACTION_NAME));
 
         // 当前控制器的UR地址
         $controllerName = defined('CONTROLLER_ALIAS') ? CONTROLLER_ALIAS : CONTROLLER_NAME;
