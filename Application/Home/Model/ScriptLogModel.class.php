@@ -19,6 +19,21 @@ class ScriptLogModel extends BModel{
         return $this->byCode($code)->getField('position');
     }
 
+    /**
+     * [updatePosition 更新脚本执行位置]
+     * @author zzz
+     * @DateTime 2022-03-24T17:33:12+0800
+     */
+    public function updatePosition($code, $position){
+    	$info  = compact('code', 'position');
+    	$count = $this->byCode($code)->count();
+        if($count){
+            return $this->byCode($code)->save($info);
+        }else{
+            return $this->add($info);
+        }
+    }
+
 }
 
 
