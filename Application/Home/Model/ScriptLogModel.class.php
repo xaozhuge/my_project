@@ -10,6 +10,15 @@ namespace Home\Model;
 class ScriptLogModel extends BModel{
     protected $trueTableName = 'DEFAULT.script_log';
 
+    /**
+     * [getPosition 通过code码获取脚本执行位置]
+     * @author zzz
+     * @DateTime 2022-03-24T16:21:26+0800
+     */
+    public function getPosition($code){
+        return $this->byCode($code)->getField('position');
+    }
+
 }
 
 
