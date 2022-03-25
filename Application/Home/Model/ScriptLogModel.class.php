@@ -12,6 +12,7 @@ class ScriptLogModel extends BModel{
 
     private $startId;//当前脚本起始ID
     private $endId;  //当前脚本截止ID
+    private $maxId;  //当前脚本最大ID
 
     /**
      * [getStartId 通过code码获取脚本执行位置 获取startId]
@@ -43,6 +44,17 @@ class ScriptLogModel extends BModel{
     }
 
     /**
+     * [getMaxId 获取 maxId]
+     * @author zzz
+     * @DateTime 2022-03-25T11:47:56+0800
+     */
+    public function getMaxId($model, $column){
+    	#获取Model表最大ID
+        $this->maxId = $model->max($column);
+        return $this->maxId;
+    }
+
+    /**
      * [updatePosition 更新脚本执行位置]
      * @author zzz
      * @DateTime 2022-03-24T17:33:12+0800
@@ -63,10 +75,8 @@ class ScriptLogModel extends BModel{
      * @DateTime 2022-03-24T18:17:32+0800
      */
     public function getColumnRange($code, $model, $column){
-        #2. 获取Model表最大ID
-        $maxId = $model->max($column);
         #3. 判断最大ID和脚本位置
-        if($maxId <= $this->startId) return false; 
+        if($this->maxId <= $this->startId) return false; 
         #6. 判断截止ID是否存在
         if(empty($this->endId)) return false; 
         #7. 更新脚本执行位置
