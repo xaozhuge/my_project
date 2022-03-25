@@ -19,12 +19,18 @@ class ScriptController extends Controller {
 
     public function __construct(){
         parent::__construct();
+        #1. 检查脚本进度表是否存在
+        $this->checkTableExist('script_log');
+        $this->scriptName = INTERFACE_NAME;
         $this->scriptStart();
+
     }
+
+    
 
     public function scriptStart(){
         echo date('Y-m-d H:i:s')."\n";
-        $this->startTime    =   microtime(true);
+        $this->startTime = microtime(true);
     }
 
     /**
@@ -41,7 +47,7 @@ class ScriptController extends Controller {
     public function scriptEnd(){
         $time = microtime(true) - $this->startTime;
         $time = $this->getModel('Number')->keepDecimal($time, 4, 1);
-        echo "ok start:{$this->startId}|end:{$this->endId}|{$time}|{$this->callNum}\n";
+        echo "ok startId:{$this->startId}|endId:{$this->endId}|maxId:{$this->maxId}|{$time}|{$this->callNum}\n";
         exit();
     }
 
