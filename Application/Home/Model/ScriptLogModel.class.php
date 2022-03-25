@@ -69,29 +69,6 @@ class ScriptLogModel extends BModel{
         }
     }
 
-    /**
-     * [getColumnRange 获取脚本 ID/update_time 取值范围]
-     * @author zzz
-     * @DateTime 2022-03-24T18:17:32+0800
-     */
-    public function getColumnRange($code, $model, $column){
-        #3. 判断最大ID和脚本位置
-        if($this->maxId <= $this->startId) return false; 
-        #6. 判断截止ID是否存在
-        if(empty($this->endId)) return false; 
-        #7. 更新脚本执行位置
-        $res = $this->updatePosition($code, $this->endId);
-    }
-
-    /**
-     * [restart 重新开始脚本进度记录]
-     * @author zzz
-     * @DateTime 2022-03-25T09:29:37+0800
-     */
-    public function restart($code){
-        return $this->updatePosition($code, '');
-    }
-
 }
 
 
