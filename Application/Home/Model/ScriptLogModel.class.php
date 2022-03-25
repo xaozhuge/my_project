@@ -25,6 +25,24 @@ class ScriptLogModel extends BModel{
     }
 
     /**
+     * [getEndId 获取 endId]
+     * @author zzz
+     * @DateTime 2022-03-25T11:29:51+0800
+     */
+    public function getEndId($model, $column, $step){
+    	#1. 大于startId，按照column升序, 取step条
+    	$sql = $model->field($column)
+        	->setWhere($column, array('gt', $this->startId))
+        	->limit($step)
+        	->order($column)
+        	->buildSql();
+        #2. 获取当前脚本的截止ID
+        $this->endId = $model->table($sql. ' a')->max($column);
+        $this->endId = dv($this->endId, 0);
+        return $this->endId;
+    }
+
+    /**
      * [updatePosition 更新脚本执行位置]
      * @author zzz
      * @DateTime 2022-03-24T17:33:12+0800
@@ -44,27 +62,15 @@ class ScriptLogModel extends BModel{
      * @author zzz
      * @DateTime 2022-03-24T18:17:32+0800
      */
-    public function getColumnRange($code, $model, $column, $step = 1){
+    public function getColumnRange($code, $model, $column){
         #2. 获取Model表最大ID
         $maxId = $model->max($column);
         #3. 判断最大ID和脚本位置
         if($maxId <= $this->startId) return false; 
-        #4. 大于startId，按照column升序, 取step条
-        $sql = $model->field($column)
-        	->setWhere($column, array('gt', $this->startId))
-        	->limit($step)
-        	->order($column)
-        	->buildSql();
-        #5. 获取当前脚本的截止ID
-        $this->endId = $model->table($sql. ' a')->max($column);
         #6. 判断截止ID是否存在
         if(empty($this->endId)) return false; 
         #7. 更新脚本执行位置
         $res = $this->updatePosition($code, $this->endId);
-        #8. 返回startId、endId
-        if($res !== false){
-            return array($this->startId, $this->endId);
-        }
     }
 
     /**
