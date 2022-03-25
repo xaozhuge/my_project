@@ -22,6 +22,12 @@ class ModelFactoryModel{
 	 */
 	public static function getModel($modelName){
 		$modelName = ucfirst($modelName);
+		
+		// 返回存在的model
+		if(isset(static::$models[$modelName])){
+			return static::$models[$modelName];
+		}
+
 		// 通过工厂创建model
 		$model     = static::createModelUseFactory($modelName);
 		if($model == null){
