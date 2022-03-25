@@ -14,14 +14,14 @@ class ScriptLogModel extends BModel{
     private $endId;  //当前脚本截止ID
 
     /**
-     * [getPosition 通过code码获取脚本执行位置]
+     * [getStartId 通过code码获取脚本执行位置 获取startId]
      * @author zzz
      * @DateTime 2022-03-24T16:21:26+0800
      */
-    public function getPosition($code){
-        $position = $this->byCode($code)->getField('position');
-        $position = dv($position, 0);
-        return $position;
+    public function getStartId($code){
+        $this->startId = $this->byCode($code)->getField('position');
+        $this->startId = dv($this->startId, 0);
+        return $this->startId;
     }
 
     /**
@@ -45,8 +45,6 @@ class ScriptLogModel extends BModel{
      * @DateTime 2022-03-24T18:17:32+0800
      */
     public function getColumnRange($code, $model, $column, $step = 1){
-        #1. 获取脚本的起始ID
-        $this->startId = $this->getPosition($code);
         #2. 获取Model表最大ID
         $maxId = $model->max($column);
         #3. 判断最大ID和脚本位置
