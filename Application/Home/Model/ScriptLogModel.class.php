@@ -69,6 +69,15 @@ class ScriptLogModel extends BModel{
         }
     }
 
+    /**
+     * [restart 重新开始脚本进度记录]
+     * @author zzz
+     * @DateTime 2022-03-25T09:29:37+0800
+     */
+    public function restart($code){
+        return $this->updatePosition($code, '');
+    }
+
 }
 
 
