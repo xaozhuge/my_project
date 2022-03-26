@@ -30,6 +30,17 @@ function dv($value,$toValue=''){
 }
 
 /**
+ * [fillZero 补0]
+ * @author zzz
+ * @DateTime 2021-05-08T17:26:54+0800
+ */
+function fillZero($num, $lmit_length = 4){
+    $num_length = strlen($num);
+    $res = str_repeat(0, $lmit_length - $num_length). $num;
+    return $res;
+}
+
+/**
  * [pp print para 打印参数]
  * @author zzz
  * @DateTime 2019-03-27T10:33:15+0800
