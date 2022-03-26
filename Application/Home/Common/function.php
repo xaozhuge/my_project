@@ -41,6 +41,15 @@ function fillZero($num, $lmit_length = 4){
 }
 
 /**
+ * [returnJson 返回json]
+ * @author zzz
+ * @DateTime 2021-12-22T18:14:37+0800
+ */
+function returnJson($list){
+    return json_encode($list, JSON_UNESCAPED_UNICODE);
+}
+
+/**
  * [pp print para 打印参数]
  * @author zzz
  * @DateTime 2019-03-27T10:33:15+0800
