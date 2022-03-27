@@ -57,3 +57,21 @@ function returnJson($list){
 function pp(){
     print_r(func_get_args());die;
 }
+
+/**
+ * [pr 输出到文件]
+ * @author zzz
+ * @DateTime 2022-03-27T19:51:53+0800
+ */
+function pr($data, $save_name = ''){
+    #1. 获取文件存储路径
+    $root      = $_SERVER['DOCUMENT_ROOT'];
+    $root      = dirname($_SERVER['SCRIPT_FILENAME']);
+    #2. 获取默认文件名
+    $temp_name = explode('/', INTERFACE_NAME)[1];
+    $save_name = dv($save_name, $temp_name);
+    #3. 拼接绝对路径
+    $file_name = $root. '/'. $save_name;
+    $content   = print_r($data, true);
+    file_put_contents($file_name, date('Y-m-d H:i:s'). "\n". $content. "\n", FILE_APPEND);
+}
