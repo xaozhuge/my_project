@@ -59,6 +59,22 @@ function pp(){
 }
 
 /**
+ * [logs 输出日志]
+ * @author zzz
+ * @DateTime 2022-03-27T20:37:01+0800
+ */
+function logs($data, $name='log'){
+    #1. 获取文件存储路径
+    $dir_name = dirname($_SERVER['SCRIPT_FILENAME']);
+    #2. 拼接输出内容
+    $data = date('Y-m-d H:i:s').':'.$data."\n";
+    #3. 文件名
+    $file_name = $dir_name. '/'. $name. '-'. date('Y-m-d'). '.log';
+    #4. 写入文件
+    file_put_contents($file_name, $data, FILE_APPEND);
+}
+
+/**
  * [pr 输出到文件]
  * @author zzz
  * @DateTime 2022-03-27T19:51:53+0800
