@@ -15,7 +15,7 @@ class SynScriptController extends ScriptController {
      */
     public function synTable(){
         #1. 定义时间和数据库
-        $limit_time = date('Y-m-d H:i:s', strtotime(" -5 minutes"));
+        $limit_time = date('Y-m-d H:i:s', strtotime(" -60 minutes"));
         $database   = 'zzz';
         #2. 数据表列表
         $sql  = "select  `TABLE_NAME`  from `information_schema`.`TABLES` where `information_schema`.`TABLES`.`TABLE_SCHEMA` = '{$database}' ";
@@ -28,11 +28,11 @@ class SynScriptController extends ScriptController {
             $update_time = $this->getModel('DEFAULT.'. $table_name)
                 ->order('update_time desc')
                 ->getField('update_time');
-            if($update_time >= $limit_time){
-
-            }else{
-
+            if($update_time < $limit_time){
+                $this->output('数据不更新', $table_name, $update_time);
+                continue;
             }
+            
         }
         $this->scriptEnd();
     }
