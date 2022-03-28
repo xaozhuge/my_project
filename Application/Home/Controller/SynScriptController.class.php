@@ -41,7 +41,9 @@ class SynScriptController extends ScriptController {
                 $this->output('最新时间相同不更新', $table_name, $update_time);
                 continue;
             }
-            $this->output('数据更新', $table_name, $update_time, $update_time_syn);
+            #4. 同步数据表
+            exec("/bin/bash syncer_table.sh", $res);
+            $this->output('数据更新', $table_name, $update_time, $update_time_syn, returnJson($res));
         }
         $this->scriptEnd();
     }
