@@ -28,9 +28,6 @@ class NumberModel{
      * @DateTime 2022-03-29T10:54:44+0800
      */
     public function numToWord($num){
-        $map_num_word = array(
-            '零', '一', '二', '三', '四', '五', '六', '七', '八', '九'
-        );
         $map_digit_word = array(
             '', '十', '百', '千'
         );
@@ -39,18 +36,46 @@ class NumberModel{
         $num_list = str_split($num, 1);
         $num_list = array_reverse($num_list);
         foreach ($num_list as $k => $v) {
-            #1. 数字转化成汉字
-            $v = $map_num_word[$v];
-            #2. 位数 
+            #1. 位数 
             $digit = $map_digit_word[$k];
+            #2. 数字处理
+            $v = $this->numToWordFormat($num_list, $k, $v);
+            if($v == '零') $digit = '';//当前值为0 为啥为空
             #3. 数字和位数拼接
             $v = $v. $digit;
             $word_list[] = $v;
+        }
+        //处理 100、1000 最后的零
+        foreach ($word_list as $k => &$v) {
+            if($k == 0 && count($word_list) > 1){
+                $word_list[$k-1] == '';
+            }
+            if($v == '零' && $word_list[$k-1] == '' && count($word_list) > 1){
+                $v = '';
+            }
         }
         $word_list = array_reverse($word_list);
         $res = implode('', $word_list);
         return $res;
 
+    }
+
+    /**
+     * [numToWordFormat 将数字转化为汉字]
+     * @author zzz
+     * @DateTime 2022-03-29T10:54:44+0800
+     */
+    public function numToWordFormat($num_list, $k, $v){
+        $map_num_word = array(
+            '零', '一', '二', '三', '四', '五', '六', '七', '八', '九'
+        );
+        //特殊处理 11 为十一，而不是 一十一
+        if($k == 1 && $v == 1 && count($num_list) == 2){
+            $v = '';
+        }else{
+            $v = $map_num_word[$v];
+        }
+        return $v;
     }
 
 }
