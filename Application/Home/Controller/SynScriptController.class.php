@@ -9,6 +9,25 @@ namespace Home\Controller;
 class SynScriptController extends ScriptController {
 
     /**
+     * [processSyn 常驻进程]
+     * @author zzz
+     * @DateTime 2022-03-29T14:32:00+0800
+     */
+    public function processSyn(){
+        $now_time_stamp   = '';
+        $limit_time_stamp = strtotime('2022-03-29 14:38:00');
+        $delay_seconds = 5;
+        while ($now_time_stamp <= $limit_time_stamp) {
+            //延迟时间
+            sleep($delay_seconds);
+            $now_time = date('Y-m-d H:i:s');
+            $now_time_stamp = strtotime($now_time);
+            $this->output('执行更新', $now_time);
+        }
+        $this->scriptEnd();
+    }
+
+    /**
      * [synTable 同步近5分钟内更新过的数据表]
      * @author zzz
      * @DateTime 2022-03-28T20:23:29+0800
