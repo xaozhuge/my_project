@@ -56,6 +56,7 @@ class NumberModel{
         }
         $word_list = array_reverse($word_list);
         $res = implode('', $word_list);
+        $res = str_replace('零零', '零', $res);
         return $res;
 
     }
