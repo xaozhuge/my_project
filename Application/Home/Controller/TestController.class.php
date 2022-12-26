@@ -15,7 +15,9 @@ class TestController extends Controller {
 			$content    .= $this->getModel('RemindDate')->formatRemindContent($remind_info);
 		}
 		$title = $start_date. '到'. $end_date;
-		$toemail = 'xaozhuge@163.com';
+		$res = $this->getModel('QyWechat')->sendWebhookText(C('QYWECHAT_KEY'), $content);
+		p($res);
+
 		$res = $this->getModel('Email')->sendEmail($toemail, $title, $content);
 		p($res);
 	}

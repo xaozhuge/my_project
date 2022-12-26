@@ -40,6 +40,15 @@ class BModel extends Model{
     }
 
     /**
+     * [curl 获取CurlModel]
+     * @author zzz
+     * @DateTime 2022-12-26T15:16:46+0800
+     */
+    public function curl(){
+        return ModelFactoryModel::getModel('Curl');
+    }
+
+    /**
      * 魔术方法操作查询
      */
     public function __call($method, $args){

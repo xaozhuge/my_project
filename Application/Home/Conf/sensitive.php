@@ -16,5 +16,7 @@ return array(
 	'DB_NAME' => checkIsSet($var_map, 'db_name'),
 	'SMTPUSERMAIL' => checkIsSet($var_map, 'smtpusermail'),
 	'SMTPPASS' => checkIsSet($var_map, 'smtppass'),
+	'QYWECHAT_KEY' => checkIsSet($var_map, 'qywechat_key'),
+	'MY_EAML' => checkIsSet($var_map, 'my_email'),
 	
 );
